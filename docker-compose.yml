@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: rudrax-backend
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "8000:8000"
     volumes:
@@ -14,8 +16,8 @@ services:
       - rudrax_uploads:/tmp/rudrax_uploads
       - rudrax_db:/app/data
     environment:
-      - OLLAMA_BASE_URL=http://ollama:11434
-      - OLLAMA_URL=http://ollama:11434
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://ollama:11434}
+      - OLLAMA_URL=${OLLAMA_URL:-http://ollama:11434}
       - RUDRAX_WORKSPACE=/app/workspace
       - REDIS_URL=redis://redis:6379/0
       - DB_PATH=/app/data/rudrax.db
@@ -70,13 +72,15 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: rudrax-celery
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command: celery -A app.celery_app worker --loglevel=info
     volumes:
       - ./workspace:/app/workspace
       - rudrax_reports:/tmp/rudrax_reports
     environment:
-      - OLLAMA_BASE_URL=http://ollama:11434
-      - OLLAMA_URL=http://ollama:11434
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://ollama:11434}
+      - OLLAMA_URL=${OLLAMA_URL:-http://ollama:11434}
       - REDIS_URL=redis://redis:6379/0
       - RUDRAX_WORKSPACE=/app/workspace
     depends_on:
