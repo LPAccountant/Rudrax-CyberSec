@@ -17,6 +17,7 @@ COPY server.py /app/server.py
 RUN mkdir -p /app/workspace /tmp/rudrax_reports /tmp/rudrax_uploads /tmp/rudrax_chromadb
 
 ENV PYTHONUNBUFFERED=1
+ENV OLLAMA_BASE_URL=http://ollama:11434
 ENV OLLAMA_URL=http://ollama:11434
 ENV RUDRAX_WORKSPACE=/app/workspace
 

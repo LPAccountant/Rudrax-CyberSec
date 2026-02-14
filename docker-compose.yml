@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: rudrax-backend
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "8000:8000"
     volumes:
@@ -70,6 +72,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: rudrax-celery
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command: celery -A app.celery_app worker --loglevel=info
     volumes:
       - ./workspace:/app/workspace
