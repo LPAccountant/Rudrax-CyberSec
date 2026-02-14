@@ -1,0 +1,20 @@
+[Unit]
+Description=RudraX CyberSec Backend
+After=network.target ollama.service
+Wants=ollama.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/rudrax/backend
+Environment=PATH=/opt/rudrax/backend/.venv/bin:/usr/local/bin:/usr/bin:/bin
+Environment=DB_PATH=/opt/rudrax/data/rudrax.db
+Environment=WORKSPACE_DIR=/opt/rudrax/workspace
+Environment=OLLAMA_BASE_URL=http://localhost:11434
+Environment=SECRET_KEY=rudrax-prod-secret-change-this-in-production
+ExecStart=/opt/rudrax/backend/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 2
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
