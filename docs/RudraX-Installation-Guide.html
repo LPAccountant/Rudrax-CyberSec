@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>RudraX CyberSec Platform v2.0 - Installation & Tools Guide</title>
+    <style>
+        @media print { body { background: white !important; color: black !important; } .page-break { page-break-before: always; } }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #0a0a1a; color: #e0e0e0; margin: 0; padding: 40px; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: #06b6d4; font-size: 2em; border-bottom: 2px solid #06b6d4; padding-bottom: 10px; }
+        h2 { color: #06b6d4; margin-top: 30px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+        h3 { color: #38bdf8; }
+        code { background: #1e293b; color: #06b6d4; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+        pre { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 16px; overflow-x: auto; color: #94a3b8; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        th, td { border: 1px solid #334155; padding: 10px; text-align: left; }
+        th { background: #1e293b; color: #06b6d4; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; font-weight: bold; }
+        .badge-red { background: rgba(220,38,38,0.2); color: #dc2626; }
+        .badge-green { background: rgba(34,197,94,0.2); color: #22c55e; }
+        .badge-blue { background: rgba(59,130,246,0.2); color: #3b82f6; }
+        .badge-yellow { background: rgba(234,179,8,0.2); color: #eab308; }
+        .header { text-align: center; padding: 40px 0; border-bottom: 2px solid #334155; margin-bottom: 30px; }
+        .header h1 { border: none; }
+        .toc { background: #0f172a; border: 1px solid #334155; border-radius: 12px; padding: 20px 30px; margin: 20px 0; }
+        .toc a { color: #38bdf8; text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+        .toc li { margin: 6px 0; }
+        .warning { background: rgba(234,179,8,0.1); border-left: 4px solid #eab308; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .info { background: rgba(59,130,246,0.1); border-left: 4px solid #3b82f6; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+    <h1>RudraX CyberSec Platform v2.0</h1>
+    <p style="color: #94a3b8; font-size: 1.1em;">AI-Powered Cybersecurity Agent Stack</p>
+    <p style="color: #64748b;">A Lalit Pandit Product | Installation & Tools Guide</p>
+    <p style="color: #475569; font-size: 0.9em;">Version 2.0 | February 2026</p>
+</div>
+
+<div class="toc">
+    <h3 style="margin-top: 0;">Table of Contents</h3>
+    <ol>
+        <li><a href="#overview">Platform Overview</a></li>
+        <li><a href="#requirements">System Requirements</a></li>
+        <li><a href="#install-docker">Installation (Docker Mode)</a></li>
+        <li><a href="#install-bare">Installation (Bare Metal)</a></li>
+        <li><a href="#config">Configuration</a></li>
+        <li><a href="#tools">Security Tools Reference</a></li>
+        <li><a href="#agents">AI Agents Reference</a></li>
+        <li><a href="#api">API Endpoints Reference</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ol>
+</div>
+
+<h2 id="overview">1. Platform Overview</h2>
+<p>RudraX CyberSec is a comprehensive AI-powered cybersecurity platform designed for red team training of IT students. It integrates multiple AI agents, security scanning tools, and an intuitive dashboard for security operations.</p>
+
+<h3>Key Features</h3>
+<table>
+    <tr><th>Category</th><th>Features</th></tr>
+    <tr><td>AI Agents</td><td>Voice Agent (Hindi/English/Hinglish), Browser Agent, API Agent, OSINT Agent, Multi-agent Pipeline (Planner → Coder → Tester → Deployer)</td></tr>
+    <tr><td>Security Tools</td><td>Nmap Scanner, Nikto, Subdomain Enumeration, WAF Detection, CMS Detection, Banner Grabbing, Traceroute, Network Discovery</td></tr>
+    <tr><td>Password Tools</td><td>Hash Cracking (MD5/SHA1/SHA256/SHA512), Password Strength Checker</td></tr>
+    <tr><td>OSINT</td><td>WHOIS, DNS Enumeration, HTTP Recon, Email Harvesting, Tech Stack Detection, Deep OSINT (one-click)</td></tr>
+    <tr><td>Reports</td><td>Vulnerability Report Generator (HTML), OSINT Reports, SOC Dashboard with AI Analysis</td></tr>
+    <tr><td>Infrastructure</td><td>Docker Compose, Redis, Celery Task Queue, Ollama LLM, Nginx SSL, Auto-deploy</td></tr>
+    <tr><td>Frontend</td><td>15+ pages: SOC Dashboard, Voice Agent, Browser Agent, OSINT, Network Tools, Reports, Projects, Chat, Agent Mode, Pentest, Files, History, Models, Admin</td></tr>
+</table>
+
+<h2 id="requirements">2. System Requirements</h2>
+<table>
+    <tr><th>Component</th><th>Minimum</th><th>Recommended</th></tr>
+    <tr><td>CPU</td><td>4 cores</td><td>8+ cores</td></tr>
+    <tr><td>RAM</td><td>8 GB</td><td>16+ GB (for LLM models)</td></tr>
+    <tr><td>Storage</td><td>20 GB</td><td>50+ GB</td></tr>
+    <tr><td>GPU</td><td>Optional</td><td>NVIDIA GPU (for faster LLM inference)</td></tr>
+    <tr><td>OS</td><td>Ubuntu 20.04+</td><td>Ubuntu 22.04 LTS</td></tr>
+    <tr><td>Docker</td><td>20.10+</td><td>24.0+</td></tr>
+    <tr><td>Docker Compose</td><td>1.29+</td><td>2.0+</td></tr>
+</table>
+
+<h2 id="install-docker">3. Installation (Docker Mode) <span class="badge badge-green">Recommended</span></h2>
+<h3>Step 1: Clone the Repository</h3>
+<pre>git clone https://github.com/ethics-learner/Rudrax-CyberSec.git
+cd Rudrax-CyberSec</pre>
+
+<h3>Step 2: One-Command Install</h3>
+<pre>sudo bash deploy/install.sh docker</pre>
+<p>This will:</p>
+<ul>
+    <li>Install Docker and Docker Compose</li>
+    <li>Build all containers (Backend, Frontend, Ollama, Redis, Celery)</li>
+    <li>Pull default LLM model (llama3)</li>
+    <li>Configure Nginx reverse proxy with SSL</li>
+    <li>Set up systemd service for auto-start</li>
+</ul>
+
+<h3>Step 3: Access the Platform</h3>
+<pre>Frontend:  https://your-domain.com
+API Docs:  https://your-domain.com/api/docs
+Admin:     lalittheonly@gmail.com / RudraX3#123nda</pre>
+
+<h3>Docker Commands</h3>
+<pre>docker-compose ps                    # Check status
+docker-compose logs -f               # View logs
+docker-compose down                  # Stop
+docker-compose up -d --build         # Rebuild & restart
+docker exec rudrax-ollama ollama pull mistral  # Pull new model</pre>
+
+<h2 id="install-bare">4. Installation (Bare Metal)</h2>
+<pre>sudo bash deploy/install.sh bare</pre>
+<p>This mode installs Python, Node.js, and runs the backend directly with systemd. Useful for development or when Docker is not available.</p>
+
+<h2 id="config">5. Configuration</h2>
+<h3>Environment Variables</h3>
+<table>
+    <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>OLLAMA_URL</code></td><td>http://ollama:11434</td><td>Ollama LLM API endpoint</td></tr>
+    <tr><td><code>REDIS_URL</code></td><td>redis://redis:6379/0</td><td>Redis connection for task queue</td></tr>
+    <tr><td><code>DB_PATH</code></td><td>/app/data/rudrax.db</td><td>SQLite database path</td></tr>
+    <tr><td><code>JWT_SECRET</code></td><td>change-this</td><td>JWT signing secret (change in production!)</td></tr>
+    <tr><td><code>REPORTS_DIR</code></td><td>/tmp/rudrax_reports</td><td>Generated reports storage</td></tr>
+    <tr><td><code>RUDRAX_DOMAIN</code></td><td>cybersec.rudrax.cloud</td><td>Domain for SSL setup</td></tr>
+</table>
+
+<div class="warning">
+    <strong>Security:</strong> Always change the <code>JWT_SECRET</code> in production. Update the admin password after first login.
+</div>
+
+<h2 id="tools">6. Security Tools Reference</h2>
+
+<h3>6.1 Nmap Scanner</h3>
+<table>
+    <tr><th>Scan Type</th><th>Description</th><th>Use Case</th></tr>
+    <tr><td><code>basic</code></td><td>TCP connect scan (-sT)</td><td>Quick port check</td></tr>
+    <tr><td><code>stealth</code></td><td>SYN scan (-sS)</td><td>Stealthy scanning</td></tr>
+    <tr><td><code>aggressive</code></td><td>Aggressive scan (-A)</td><td>Full enumeration</td></tr>
+    <tr><td><code>vuln</code></td><td>Vulnerability scripts</td><td>CVE detection</td></tr>
+    <tr><td><code>os_detect</code></td><td>OS fingerprinting (-O)</td><td>OS identification</td></tr>
+    <tr><td><code>service</code></td><td>Service version (-sV)</td><td>Service detection</td></tr>
+    <tr><td><code>full</code></td><td>Complete scan (-sV -sC -O)</td><td>Comprehensive audit</td></tr>
+</table>
+
+<h3>6.2 Nikto Web Scanner</h3>
+<p>Scans web servers for dangerous files, outdated software, misconfigurations, and known vulnerabilities. Falls back to built-in HTTP header analysis if nikto binary is not installed.</p>
+
+<h3>6.3 Network Tools</h3>
+<table>
+    <tr><th>Tool</th><th>Description</th></tr>
+    <tr><td>Traceroute</td><td>Network path tracing to target</td></tr>
+    <tr><td>Banner Grab</td><td>Service banner extraction from ports</td></tr>
+    <tr><td>WAF Detect</td><td>Detects Cloudflare, AWS WAF, Akamai, Imperva, Sucuri, ModSecurity, F5, Barracuda, Fortinet</td></tr>
+    <tr><td>CMS Detect</td><td>Identifies WordPress, Joomla, Drupal, Magento, Shopify, Wix, Next.js, Ghost, Hugo, Gatsby</td></tr>
+    <tr><td>Network Discovery</td><td>Discovers live hosts on network range (CIDR notation)</td></tr>
+    <tr><td>Password Audit</td><td>Hash cracking against common password list (MD5, SHA1, SHA256, SHA512)</td></tr>
+    <tr><td>Password Strength</td><td>Evaluates password strength (length, complexity, common patterns)</td></tr>
+</table>
+
+<h3>6.4 OSINT Tools</h3>
+<table>
+    <tr><th>Tool</th><th>Description</th></tr>
+    <tr><td>Deep OSINT</td><td>One-click full intelligence gathering (all tools + AI analysis)</td></tr>
+    <tr><td>WHOIS</td><td>Domain registration and ownership info</td></tr>
+    <tr><td>DNS Enumeration</td><td>A, AAAA, MX, NS, TXT, SOA, CNAME, SRV records</td></tr>
+    <tr><td>Subdomain Enum</td><td>Discovery of 40+ common subdomains</td></tr>
+    <tr><td>HTTP Recon</td><td>Headers, redirects, security headers, technology detection</td></tr>
+    <tr><td>Email Harvester</td><td>Email address extraction from target website</td></tr>
+    <tr><td>Tech Stack</td><td>Detects 20+ technologies (React, Vue, Angular, WordPress, Django, etc.)</td></tr>
+</table>
+
+<h2 id="agents">7. AI Agents Reference</h2>
+
+<h3>7.1 Voice Agent</h3>
+<p>Supports <strong>Hindi</strong>, <strong>English</strong>, and <strong>Hinglish</strong> (mixed). Auto-detects language from input text using regex patterns for Hindi characters and Hinglish keywords. Provides context-aware responses for cybersecurity, coding, networking, and general queries.</p>
+
+<h3>7.2 Browser & API Agent</h3>
+<ul>
+    <li><strong>Browse URL:</strong> Extract text, headers, links, or forms from any URL</li>
+    <li><strong>Crawl Site:</strong> Spider up to N pages from a starting URL</li>
+    <li><strong>API Tester:</strong> Send GET/POST/PUT/DELETE/PATCH requests with custom headers and auth</li>
+    <li><strong>API Analyzer:</strong> AI-powered security analysis of API responses</li>
+</ul>
+
+<h3>7.3 OSINT Agent</h3>
+<p>One-click deep intelligence gathering that orchestrates WHOIS, DNS, subdomain enumeration, HTTP reconnaissance, email harvesting, and tech stack detection. Results are analyzed by AI and can be exported as HTML reports.</p>
+
+<h3>7.4 Multi-Agent Pipeline</h3>
+<p>Planner → Coder → Tester → Deployer pipeline with auto-agent detection based on message content. Agents include: Task Planner, Code Agent, Security Agent, Test Agent, Infra Agent, and Web Agent.</p>
+
+<h3>7.5 SOC Dashboard</h3>
+<p>Security Operations Center with:</p>
+<ul>
+    <li>Real-time event monitoring with severity classification</li>
+    <li>AI-powered event analysis</li>
+    <li>Auto-patch suggestion generation</li>
+    <li>Severity distribution charts</li>
+    <li>Timeline views and statistics</li>
+</ul>
+
+<h2 id="api">8. API Endpoints Reference</h2>
+<table>
+    <tr><th>Endpoint</th><th>Method</th><th>Description</th></tr>
+    <tr><td>/api/auth/login</td><td>POST</td><td>JWT authentication</td></tr>
+    <tr><td>/api/auth/register</td><td>POST</td><td>User registration</td></tr>
+    <tr><td>/api/voice/process</td><td>POST</td><td>Voice agent (Hindi/English/Hinglish)</td></tr>
+    <tr><td>/api/voice/translate</td><td>POST</td><td>Text translation</td></tr>
+    <tr><td>/api/browser/browse</td><td>POST</td><td>Browse URL and extract data</td></tr>
+    <tr><td>/api/browser/crawl</td><td>POST</td><td>Crawl website</td></tr>
+    <tr><td>/api/browser/api-test</td><td>POST</td><td>API testing</td></tr>
+    <tr><td>/api/browser/api-analyze</td><td>POST</td><td>AI API security analysis</td></tr>
+    <tr><td>/api/osint/deep-scan</td><td>POST</td><td>One-click deep OSINT</td></tr>
+    <tr><td>/api/osint/whois</td><td>POST</td><td>WHOIS lookup</td></tr>
+    <tr><td>/api/osint/dns</td><td>POST</td><td>DNS enumeration</td></tr>
+    <tr><td>/api/osint/subdomains</td><td>POST</td><td>Subdomain discovery</td></tr>
+    <tr><td>/api/network/nmap</td><td>POST</td><td>Nmap port scanning</td></tr>
+    <tr><td>/api/network/nikto</td><td>POST</td><td>Nikto web scanning</td></tr>
+    <tr><td>/api/network/traceroute</td><td>POST</td><td>Network path tracing</td></tr>
+    <tr><td>/api/network/waf-detect</td><td>POST</td><td>WAF detection</td></tr>
+    <tr><td>/api/network/cms-detect</td><td>POST</td><td>CMS detection</td></tr>
+    <tr><td>/api/network/password-audit</td><td>POST</td><td>Hash cracking</td></tr>
+    <tr><td>/api/network/password-strength</td><td>POST</td><td>Password strength check</td></tr>
+    <tr><td>/api/soc/dashboard</td><td>GET</td><td>SOC dashboard stats</td></tr>
+    <tr><td>/api/soc/auto-patch</td><td>POST</td><td>Auto-patch generation</td></tr>
+    <tr><td>/api/reports/generate</td><td>POST</td><td>Generate vulnerability report</td></tr>
+    <tr><td>/api/reports/download/{id}</td><td>GET</td><td>Download report</td></tr>
+    <tr><td>/api/projects/</td><td>GET/POST</td><td>Multi-project workspace</td></tr>
+    <tr><td>/healthz</td><td>GET</td><td>Health check</td></tr>
+</table>
+
+<h2 id="troubleshooting">9. Troubleshooting</h2>
+
+<h3>Ollama not connecting</h3>
+<pre>docker exec rudrax-ollama ollama list    # Check models
+docker logs rudrax-ollama                 # Check logs
+docker restart rudrax-ollama              # Restart</pre>
+
+<h3>Backend not starting</h3>
+<pre>docker logs rudrax-backend               # Check errors
+docker-compose down && docker-compose up -d  # Restart all</pre>
+
+<h3>Redis connection issues</h3>
+<pre>docker logs rudrax-redis                 # Check Redis logs
+docker exec rudrax-redis redis-cli ping  # Test connection</pre>
+
+<h3>SSL certificate issues</h3>
+<pre>sudo certbot --nginx -d your-domain.com  # Re-run certbot
+sudo certbot renew                        # Renew certificates</pre>
+
+<div class="info">
+    <strong>Support:</strong> For issues, create a GitHub issue at <code>github.com/ethics-learner/Rudrax-CyberSec</code>
+</div>
+
+<div style="text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid #334155; color: #475569;">
+    <p>RudraX CyberSec Platform v2.0 | A Lalit Pandit Product</p>
+    <p>For educational and authorized security testing use only</p>
+</div>
+
+</div>
+</body>
+</html>

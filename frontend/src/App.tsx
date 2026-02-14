@@ -9,6 +9,13 @@ import PentestPage from "@/pages/PentestPage";
 import FilesPage from "@/pages/FilesPage";
 import HistoryPage from "@/pages/HistoryPage";
 import AdminPage from "@/pages/AdminPage";
+import SOCDashboard from "@/pages/SOCDashboard";
+import VoiceAgentPage from "@/pages/VoiceAgentPage";
+import BrowserAgentPage from "@/pages/BrowserAgentPage";
+import OSINTPage from "@/pages/OSINTPage";
+import NetworkToolsPage from "@/pages/NetworkToolsPage";
+import ReportsPage from "@/pages/ReportsPage";
+import ProjectsPage from "@/pages/ProjectsPage";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -52,8 +59,15 @@ function AppRoutes() {
       >
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/agent" element={<AgentPage />} />
+        <Route path="/soc" element={<SOCDashboard />} />
+        <Route path="/voice" element={<VoiceAgentPage />} />
+        <Route path="/browser-agent" element={<BrowserAgentPage />} />
+        <Route path="/osint" element={<OSINTPage />} />
+        <Route path="/network" element={<NetworkToolsPage />} />
         <Route path="/models" element={<ModelsPage />} />
         <Route path="/pentest" element={<PentestPage />} />
+        <Route path="/reports" element={<ReportsPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/files" element={<FilesPage />} />
         <Route path="/history" element={<HistoryPage />} />
         <Route

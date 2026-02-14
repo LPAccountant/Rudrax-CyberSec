@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "app"
-version = "0.1.0"
-description = ""
-authors = ["Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>"]
+name = "rudrax-cybersec"
+version = "2.0.0"
+description = "RudraX CyberSec - AI-Powered Cybersecurity Agent Stack"
+authors = ["Lalit Pandit <lalittheonly@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -17,6 +17,8 @@ httpx = "^0.28.1"
 aiosqlite = "^0.22.1"
 python-dotenv = "^1.2.1"
 websockets = "^16.0"
+celery = {extras = ["redis"], version = "^5.4.0"}
+redis = "^5.2.0"
 
 
 [build-system]

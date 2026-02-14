@@ -5,6 +5,7 @@ from app.core.database import init_db
 from app.core.security import hash_password
 from app.core.config import DB_PATH
 from app.api import auth, admin, chat, models, tasks, files, pentest, agent
+from app.api import voice, browser, osint, network, reports, soc, projects
 import aiosqlite
 
 
@@ -28,9 +29,13 @@ async def seed_admin():
             await db.commit()
 
 
-app = FastAPI(title="RudraX CyberSec Platform", version="1.0.0", lifespan=lifespan)
+app = FastAPI(
+    title="RudraX CyberSec Platform",
+    version="2.0.0",
+    description="AI-Powered Cybersecurity Agent Stack - A Lalit Pandit Product",
+    lifespan=lifespan,
+)
 
-# Disable CORS. Do not remove this for full-stack development.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -47,8 +52,15 @@ app.include_router(tasks.router)
 app.include_router(files.router)
 app.include_router(pentest.router)
 app.include_router(agent.router)
+app.include_router(voice.router)
+app.include_router(browser.router)
+app.include_router(osint.router)
+app.include_router(network.router)
+app.include_router(reports.router)
+app.include_router(soc.router)
+app.include_router(projects.router)
 
 
 @app.get("/healthz")
 async def healthz():
-    return {"status": "ok"}
+    return {"status": "ok", "version": "2.0.0", "platform": "RudraX CyberSec"}
