@@ -18,7 +18,9 @@ PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$PROJECT_DIR"
 
 echo -e "${CYAN}[1/4] Pulling latest code from GitHub...${NC}"
+git stash 2>/dev/null || true
 git pull origin main
+git stash pop 2>/dev/null || true
 echo -e "${GREEN}  Code updated${NC}"
 
 OLLAMA_HOST_URL="${OLLAMA_BASE_URL:-}"
@@ -58,14 +60,14 @@ else
 fi
 
 echo -e "${CYAN}[4/4] Checking Ollama connection...${NC}"
-MODELS=$(curl -s http://127.0.0.1:8000/api/models/ 2>/dev/null || echo "[]")
-if echo "$MODELS" | grep -q "name"; then
-    echo -e "${GREEN}  Ollama connected - models available${NC}"
+if curl -s http://127.0.0.1:11434/api/tags 2>/dev/null | grep -q "models"; then
+    echo -e "${GREEN}  Ollama reachable on host - models available${NC}"
+elif docker exec rudrax-ollama ollama list 2>/dev/null | grep -q ":"; then
+    echo -e "${GREEN}  Ollama running in Docker - models available${NC}"
 else
-    echo -e "${YELLOW}  Ollama not reachable from backend yet.${NC}"
-    echo -e "${YELLOW}  If Ollama runs separately, set OLLAMA_BASE_URL:${NC}"
-    echo -e "${YELLOW}    export OLLAMA_BASE_URL=http://host.docker.internal:11434${NC}"
-    echo -e "${YELLOW}    docker-compose up -d --build${NC}"
+    echo -e "${YELLOW}  Ollama not reachable yet.${NC}"
+    echo -e "${YELLOW}  If Ollama runs in a separate container, use:${NC}"
+    echo -e "${YELLOW}    OLLAMA_BASE_URL=http://host.docker.internal:11434 docker-compose up -d --build${NC}"
 fi
 
 echo ""
