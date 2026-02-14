@@ -1,24 +1,47 @@
 version: '3.8'
 
 services:
-  rudrax:
-    build: .
-    container_name: rudrax-cybersec
+  rudrax-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rudrax-backend
     ports:
       - "8000:8000"
     volumes:
       - ./workspace:/app/workspace
-      - ./static:/app/static
+      - rudrax_reports:/tmp/rudrax_reports
+      - rudrax_uploads:/tmp/rudrax_uploads
+      - rudrax_db:/app/data
     environment:
       - OLLAMA_URL=http://ollama:11434
       - RUDRAX_WORKSPACE=/app/workspace
+      - REDIS_URL=redis://redis:6379/0
+      - DB_PATH=/app/data/rudrax.db
+      - REPORTS_DIR=/tmp/rudrax_reports
+      - UPLOAD_DIR=/tmp/rudrax_uploads
+      - JWT_SECRET=change-this-in-production
       - PORT=8000
     depends_on:
       - ollama
+      - redis
     networks:
       - rudrax-network
     restart: unless-stopped
-  
+
+  rudrax-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: rudrax-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - rudrax-backend
+    networks:
+      - rudrax-network
+    restart: unless-stopped
+
   ollama:
     image: ollama/ollama:latest
     container_name: rudrax-ollama
@@ -30,8 +53,43 @@ services:
       - rudrax-network
     restart: unless-stopped
 
+  redis:
+    image: redis:7-alpine
+    container_name: rudrax-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - rudrax-network
+    restart: unless-stopped
+
+  celery-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rudrax-celery
+    command: celery -A app.celery_app worker --loglevel=info
+    volumes:
+      - ./workspace:/app/workspace
+      - rudrax_reports:/tmp/rudrax_reports
+    environment:
+      - OLLAMA_URL=http://ollama:11434
+      - REDIS_URL=redis://redis:6379/0
+      - RUDRAX_WORKSPACE=/app/workspace
+    depends_on:
+      - redis
+      - ollama
+    networks:
+      - rudrax-network
+    restart: unless-stopped
+
 volumes:
   ollama_data:
+  redis_data:
+  rudrax_reports:
+  rudrax_uploads:
+  rudrax_db:
 
 networks:
   rudrax-network:

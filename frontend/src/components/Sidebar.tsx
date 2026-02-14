@@ -10,13 +10,27 @@ import {
   Users,
   LogOut,
   Terminal,
+  Mic,
+  Globe,
+  Eye,
+  Wifi,
+  FileText,
+  FolderGit2,
+  Activity,
 } from "lucide-react";
 
 const navItems = [
   { to: "/chat", icon: MessageSquare, label: "Chat" },
   { to: "/agent", icon: Bot, label: "Agent Mode" },
-  { to: "/models", icon: Cpu, label: "Models" },
+  { to: "/soc", icon: Activity, label: "SOC Dashboard" },
+  { to: "/voice", icon: Mic, label: "Voice Agent" },
+  { to: "/browser-agent", icon: Globe, label: "Browser & API" },
+  { to: "/osint", icon: Eye, label: "OSINT Agent" },
+  { to: "/network", icon: Wifi, label: "Network Tools" },
   { to: "/pentest", icon: Shield, label: "Pentest Tools" },
+  { to: "/reports", icon: FileText, label: "Reports" },
+  { to: "/projects", icon: FolderGit2, label: "Projects" },
+  { to: "/models", icon: Cpu, label: "Models" },
   { to: "/files", icon: FolderOpen, label: "File Manager" },
   { to: "/history", icon: History, label: "Task History" },
 ];
