@@ -120,11 +120,11 @@ export default function VoiceAgentPage() {
           {result && (
             <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-5">
               <div className="flex items-center gap-2 mb-3">
-                {result.detected_language && (
-                  <span className="bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded text-xs font-medium">
-                    {String(result.detected_language).toUpperCase()}
-                  </span>
-                )}
+                  {typeof result.detected_language === "string" && (
+                    <span className="bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded text-xs font-medium">
+                      {result.detected_language.toUpperCase()}
+                    </span>
+                  )}
               </div>
               <div className="text-gray-300 text-sm whitespace-pre-wrap">
                 {result.response ? String(result.response) : JSON.stringify(result, null, 2)}
