@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { api } from "@/services/api";
-import { Shield, AlertTriangle, CheckCircle, Activity, FileText, Search, Brain } from "lucide-react";
+import { Shield, AlertTriangle, Activity, FileText, Search, Brain } from "lucide-react";
 
 interface DashboardStats {
   severity_stats: Record<string, number>;

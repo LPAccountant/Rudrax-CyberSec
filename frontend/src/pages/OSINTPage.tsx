@@ -7,7 +7,6 @@ export default function OSINTPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<Record<string, unknown> | null>(null);
   const [activeTab, setActiveTab] = useState<"deep" | "whois" | "dns" | "subdomains" | "http" | "emails" | "tech">("deep");
-  const [history, setHistory] = useState<Array<Record<string, unknown>>>([]);
 
   const tools = [
     { key: "deep", label: "Deep OSINT", icon: Eye, desc: "Full intelligence gathering" },
@@ -44,16 +43,7 @@ export default function OSINTPage() {
     setLoading(false);
   }
 
-  async function loadHistory() {
-    try {
-      const h = await api.osintHistory();
-      setHistory(h);
-    } catch {
-      /* empty */
-    }
-  }
-
-  async function generateReport() {
+  async function generateReport(){
     if (!target) return;
     setLoading(true);
     try {

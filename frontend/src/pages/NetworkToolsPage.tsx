@@ -165,14 +165,14 @@ export default function NetworkToolsPage() {
         <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-white font-semibold">Results</h3>
-            {result.status && (
+            {typeof result.status === "string" && (
               <span className={`px-2 py-0.5 rounded text-xs font-medium ${result.status === "completed" ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"}`}>
-                {String(result.status).toUpperCase()}
+                {result.status.toUpperCase()}
               </span>
             )}
           </div>
 
-          {activeTool === "password-strength" && result.strength && (
+          {activeTool === "password-strength" && typeof result.strength === "string" && (
             <div className="mb-4">
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-white text-sm">Strength:</span>
