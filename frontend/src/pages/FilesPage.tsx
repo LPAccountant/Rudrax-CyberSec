@@ -138,7 +138,7 @@ export default function FilesPage() {
                   <span className="text-xs text-gray-600 mr-4">{f.is_dir ? "DIR" : formatSize(f.size)}</span>
                   <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                     {!f.is_dir && (
-                      <a href={`${import.meta.env.VITE_API_URL || "http://localhost:8000"}/api/files/download?path=${encodeURIComponent(f.path)}`} className="p-1.5 text-gray-500 hover:text-cyan-400 transition-all">
+                      <a href={`${import.meta.env.VITE_API_URL || ""}/api/files/download?path=${encodeURIComponent(f.path)}`} className="p-1.5 text-gray-500 hover:text-cyan-400 transition-all">
                         <Download className="w-3.5 h-3.5" />
                       </a>
                     )}

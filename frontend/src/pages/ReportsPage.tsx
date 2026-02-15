@@ -134,7 +134,7 @@ export default function ReportsPage() {
               </div>
               <div className="flex items-center gap-2">
                 <button
-                  onClick={() => window.open(`${import.meta.env.VITE_API_URL || "http://localhost:8000"}/api/reports/download/${report.id}`, "_blank")}
+                  onClick={() => window.open(`${import.meta.env.VITE_API_URL || ""}/api/reports/download/${report.id}`, "_blank")}
                   className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-gray-800 rounded-lg transition-all"
                   title="Download"
                 >
