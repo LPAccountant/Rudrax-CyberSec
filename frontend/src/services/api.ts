@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const API_URL = import.meta.env.VITE_API_URL || "";
 
 function getToken(): string | null {
   return localStorage.getItem("token");
@@ -189,7 +189,8 @@ export const api = {
   },
 
   getWsUrl(token: string) {
-    const wsBase = API_URL.replace("http", "ws");
+    const base = API_URL || window.location.origin;
+    const wsBase = base.replace(/^http/, "ws");
     return `${wsBase}/api/agent/ws/${token}`;
   },
 
