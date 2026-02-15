@@ -5,7 +5,7 @@ from app.core.database import init_db
 from app.core.security import hash_password
 from app.core.config import DB_PATH
 from app.api import auth, admin, chat, models, tasks, files, pentest, agent
-from app.api import voice, browser, osint, network, reports, soc, projects
+from app.api import voice, browser, osint, network, reports, soc, projects, deploy
 import aiosqlite
 
 
@@ -59,6 +59,7 @@ app.include_router(network.router)
 app.include_router(reports.router)
 app.include_router(soc.router)
 app.include_router(projects.router)
+app.include_router(deploy.router)
 
 
 @app.get("/healthz")
