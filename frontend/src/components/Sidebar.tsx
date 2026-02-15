@@ -17,6 +17,7 @@ import {
   FileText,
   FolderGit2,
   Activity,
+  Rocket,
 } from "lucide-react";
 
 const navItems = [
@@ -30,6 +31,7 @@ const navItems = [
   { to: "/pentest", icon: Shield, label: "Pentest Tools" },
   { to: "/reports", icon: FileText, label: "Reports" },
   { to: "/projects", icon: FolderGit2, label: "Projects" },
+  { to: "/deploy", icon: Rocket, label: "Deploy" },
   { to: "/models", icon: Cpu, label: "Models" },
   { to: "/files", icon: FolderOpen, label: "File Manager" },
   { to: "/history", icon: History, label: "Task History" },

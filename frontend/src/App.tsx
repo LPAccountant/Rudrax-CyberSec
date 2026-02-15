@@ -16,6 +16,7 @@ import OSINTPage from "@/pages/OSINTPage";
 import NetworkToolsPage from "@/pages/NetworkToolsPage";
 import ReportsPage from "@/pages/ReportsPage";
 import ProjectsPage from "@/pages/ProjectsPage";
+import DeployPage from "@/pages/DeployPage";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -68,6 +69,7 @@ function AppRoutes() {
         <Route path="/pentest" element={<PentestPage />} />
         <Route path="/reports" element={<ReportsPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/deploy" element={<DeployPage />} />
         <Route path="/files" element={<FilesPage />} />
         <Route path="/history" element={<HistoryPage />} />
         <Route

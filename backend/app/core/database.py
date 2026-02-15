@@ -156,6 +156,26 @@ async def init_db():
             )
         """)
         await db.execute("""
+            CREATE TABLE IF NOT EXISTS deployments (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                name TEXT NOT NULL,
+                git_url TEXT,
+                branch TEXT DEFAULT 'main',
+                deploy_path TEXT,
+                build_command TEXT,
+                run_command TEXT,
+                port INTEGER DEFAULT 0,
+                env_vars TEXT,
+                pid TEXT,
+                status TEXT NOT NULL DEFAULT 'ready',
+                logs TEXT,
+                created_at TEXT NOT NULL DEFAULT (datetime('now')),
+                updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+                FOREIGN KEY (user_id) REFERENCES users(id)
+            )
+        """)
+        await db.execute("""
             CREATE TABLE IF NOT EXISTS memory_store (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user_id INTEGER NOT NULL,

@@ -364,4 +364,21 @@ export const api = {
     const res = await request(`/api/projects/${id}/git-pull`, { method: "POST" });
     return res.json();
   },
+
+  async deployList() {
+    const res = await request("/api/deploy/");
+    return res.json();
+  },
+  async deployCreate(data: { name: string; git_url?: string; branch?: string; build_command?: string; run_command?: string; port?: number; env_vars?: Record<string, string>; project_id?: number }) {
+    const res = await request("/api/deploy/", { method: "POST", body: JSON.stringify(data) });
+    return res.json();
+  },
+  async deployAction(id: number, action: string) {
+    const res = await request(`/api/deploy/${id}/action`, { method: "POST", body: JSON.stringify({ action }) });
+    return res.json();
+  },
+  async deployLogs(id: number) {
+    const res = await request(`/api/deploy/${id}/logs`);
+    return res.json();
+  },
 };
